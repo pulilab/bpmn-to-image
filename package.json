@@ -1,10 +1,10 @@
 {
-  "name": "bpmn-to-image",
+  "name": "dmn-to-image",
   "version": "0.5.1",
   "description": "Convert a BPMN 2.0 diagrams to PDF, SVG or PNG images",
   "main": "index.js",
   "bin": {
-    "bpmn-to-image": "./cli.js"
+    "dmn-to-image": "./cli.js"
   },
   "scripts": {
     "all": "run-s test",
@@ -28,14 +28,14 @@
   "author": "Nico Rehwaldt <https://github.com/nikku>",
   "license": "MIT",
   "dependencies": {
-    "bpmn-js": "^6.3.0",
     "chalk": "^2.4.2",
+    "dmn-js": "^9.1.0-colors.0",
     "meow": "^4.0.0",
     "puppeteer": "^1.16.0"
   },
   "devDependencies": {
-    "del": "^3.0.0",
     "chai": "^4.1.2",
+    "del": "^3.0.0",
     "execa": "^0.10.0",
     "mocha": "^5.1.1",
     "npm-run-all": "^4.1.2"

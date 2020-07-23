@@ -41,24 +41,24 @@
 
     <script>
       // viewer instance, lazily initialized
-      var bpmnViewer;
+      var dmnViewer;
 
       /**
        * Get or create viewer instance.
        *
-       * @return {BpmnViewer}
+       * @return {dmnViewer}
        */
       function getViewer() {
 
-        if (bpmnViewer) {
-          return bpmnViewer;
+        if (dmnViewer) {
+          return dmnViewer;
         }
 
-        bpmnViewer = new BpmnJS({
+        dmnViewer = new DmnJS({
           container: '#canvas'
         });
 
-        bpmnViewer.on('import.done', function(event) {
+        dmnViewer.on('import.done', function(event) {
 
           var error = event.error;
           var warnings = event.warnings;
@@ -68,10 +68,10 @@
           }
 
           // zoom to fit full viewport
-          bpmnViewer.get('canvas').zoom('fit-viewport');
+          dmnViewer.getActiveViewer().get('canvas').zoom('fit-viewport');
         });
 
-        return bpmnViewer;
+        return dmnViewer;
       }
 
       /**
@@ -86,7 +86,7 @@
       function openDiagram(bpmnXML, options) {
 
         // viewer instance, lazily initialized
-        const bpmnViewer = getViewer();
+        const dmnViewer = getViewer();
 
         options = options || {};
 
@@ -100,13 +100,13 @@
         var footer = options.footer;
 
         return new Promise(function(resolve, reject) {
-          bpmnViewer.importXML(bpmnXML, function(err) {
+          dmnViewer.importXML(bpmnXML, function(err) {
 
             if (err) {
               return reject(err);
             }
 
-            var viewbox = bpmnViewer.get('canvas').viewbox();
+            var viewbox = dmnViewer.getActiveViewer().get('canvas').viewbox();
 
             // uses provided title
             var titleNode = document.querySelector('#title');
@@ -135,9 +135,9 @@
        * Resize to viewport
        */
       function resize() {
-        const bpmnViewer = getViewer();
+        const dmnViewer = getViewer();
 
-        var canvas = bpmnViewer.get('canvas');
+        var canvas = dmnViewer.getActiveViewer().get('canvas');
 
         return new Promise(function(resolve, reject) {
           canvas.resized();
@@ -149,10 +149,10 @@
       }
 
       function toSVG() {
-        const bpmnViewer = getViewer();
+        const dmnViewer = getViewer();
 
         return new Promise(function(resolve, reject) {
-          bpmnViewer.saveSVG(function(err, svg) {
+          dmnViewer.saveSVG(function(err, svg) {
 
             if (err) {
               reject(err);
@@ -164,7 +164,7 @@
       }
 
       /**
-       * Load the script that provides the BpmnJS global
+       * Load the script that provides the DmnJS global
        *
        * @param  {String} src
        *

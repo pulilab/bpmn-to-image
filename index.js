@@ -31,7 +31,8 @@ async function printDiagram(page, options) {
 
   await page.goto(`file://${__dirname}/skeleton.html`);
 
-  const viewerScript = relative(__dirname, require.resolve('bpmn-js/dist/bpmn-viewer.production.min.js'));
+  const viewerScript = relative(__dirname, require.resolve('dmn-js/dist/dmn-viewer.development.js'));
+  // const viewerScript = relative(__dirname, require.resolve('dmn-js/dist/dmn-modeler.development.js'));
 
   const desiredViewport = await page.evaluate(async function(diagramXML, options) {
 
@@ -49,8 +50,9 @@ async function printDiagram(page, options) {
     title: diagramTitle,
     viewerScript,
     footer
-  });;
+  });
 
+  console.log(desiredViewport)
   page.setViewport({
     width: Math.round(desiredViewport.width),
     height: Math.round(desiredViewport.height),
