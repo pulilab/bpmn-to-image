@@ -1,6 +1,6 @@
 {
   "name": "dmn-to-image",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "Convert a DMN diagrams to PDF, SVG or PNG images",
   "main": "index.js",
   "bin": {
